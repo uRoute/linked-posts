@@ -29,4 +29,49 @@
     </div>
     }
 
+
+
+
+    <div class="my-3">
+        @for (post of postsData; track post._id) {
+            <article class="rounded-md p-3 flex flex-col gap-4 my-3 bg-white">
+                <div class="post-head my-3 flex justify-between items-center">
+                    <div class="flex gap-2 items-center">
+                        <img class="w-10 h-10 rounded-full" [src]="post.user.photo" alt="">
+        
+                        <div>
+                            <h1 class="text-2xl font-black"> {{post.user.name}} </h1>
+                            <span class="text-slate-300 font-semibold"> {{post.createdAt | date:'short' }} </span>
+                        </div>
+                    </div>
+        
+                    <div>
+                        <span>
+                            <i class="fa-solid fa-sliders"></i>
+                        </span>
+                    </div>
+        
+                </div>
+                <div class="post-body">
+                    @if(post.body){
+                    <p class="font-semibold my-3 text-xl"> {{post.body}} </p>
+                    }
+        
+                    @if(post.image){
+                    <img class="rounded-md w-full" [src]="post.image" alt="">
+                    }
+                </div>
+                <button #showComment class="text-blue-500 self-start font-semibold text-2xl">Show Comment</button>
+                @defer (on interaction(showComment)) {
+                <app-comments [postId]="post._id"></app-comments>
+                }
+            </article>
+        
+            }@empty {
+                <h1 class="text-center my-4 font-bold text-4xl dark:text-white">Loading.... <span class="text-blue-500 text-2xl font-semibold"><i class="fa-solid fa-truck-ramp-box fa-shake"></i></span></h1>
+            }
+        
+
+    </div>
+
 </section>

@@ -3,16 +3,21 @@ import { UsersService } from '../../core/services/users/users.service';
 import { IUser } from '../../core/interfaces/user/iuser';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CommentsComponent } from "../comments/comments/comments.component";
+import { PostsService } from '../../core/services/posts/posts.service';
+import { IPost } from '../../core/interfaces/post/ipost';
 
 @Component({
   selector: 'app-profile',
-  imports: [UpperCasePipe, DatePipe , RouterLink],
+  imports: [UpperCasePipe, DatePipe, RouterLink, CommentsComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
 
-  private readonly _UsersService = inject(UsersService)
+  private readonly _UsersService = inject(UsersService);
+  private readonly _PostsService = inject(PostsService);
+  postsData!:IPost[]
   userData!:IUser;
   imgSrc!:File
   ngOnInit(){
@@ -20,6 +25,15 @@ export class ProfileComponent {
       next:(res)=>{
         console.log(res.user);
         this.userData = res.user
+      }
+    })
+    this._PostsService.GetUserPosts().subscribe({
+      next:(res)=>{
+        console.log(res.posts);
+        this.postsData = res.posts;
+      },
+      error:(err)=>{
+        console.log(err);
       }
     })
   }
