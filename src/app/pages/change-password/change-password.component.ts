@@ -16,7 +16,7 @@ export class ChangePasswordComponent {
   clearTimeOut:any
   changePasswordForm:FormGroup= new FormGroup({
     password: new FormControl(null , Validators.required),
-    newPassword: new FormControl(null , [Validators.required , Validators.pattern(/^[A-Z][a-z]{2,}[@#$%^&*!]{1,8}[0-9]{2,}$/)]),
+    newPassword: new FormControl(null , [Validators.required , Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]),
   })
 
   change(){

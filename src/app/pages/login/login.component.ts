@@ -19,7 +19,7 @@ export class LoginComponent implements OnDestroy{
   resMessage!:string
   loginForm:FormGroup = new FormGroup({
     email: new FormControl(null , [Validators.required , Validators.email]),
-    password: new FormControl(null , [Validators.required , Validators.pattern(/^[A-Z][a-z]{2,}[@#$%^&*!]{1,8}[0-9]{2,}$/)]),
+    password: new FormControl(null , [Validators.required , Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)]),
   })
 
   // Method to register new submit : fires when (ngSubmit)
