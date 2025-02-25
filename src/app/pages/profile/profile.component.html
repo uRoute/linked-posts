@@ -1,21 +1,20 @@
 <section class="p-3">
-
     @if(userData){
-        
     <div class="bg-slate-100 p-3 shadow-md rounded-md">
         <h1 class="font-black text-center text-6xl">Hello , {{userData.name}} 🙋‍♂️</h1>
         <div class="my-6">
-            <div class="w-40 h-40 mx-auto my-4 cursor-pointer overflow-hidden rounded-full border-4 border-blue-500 p-4">
+            <div
+                class="w-40 h-40 mx-auto my-4 cursor-pointer overflow-hidden rounded-full border-4 border-blue-500 p-4">
                 <img class="w-full h-full rounded-full" [src]="userData.photo" alt="">
-                
             </div>
-            <label for="img-profile" class="cursor-pointer font-black text-blue-500 block mx-auto w-1/2">Change profile photo</label>
-            <input (change)="ChangeImg($event)" class="hidden" id="img-profile" type="file" >
+            <label for="img-profile" class="cursor-pointer font-black text-blue-500 block mx-auto w-1/2">Change profile
+                photo</label>
+            <input (change)="ChangeImg($event)" class="hidden" id="img-profile" type="file">
         </div>
-
         <div class="flex items-center my-3 gap-x-3 text-3xl font-semibold">
             <label for="email">Email</label>
-            <input (change)="ChangeImg($event)" class="rounded-full w-1/4 read-only:bg-slate-300 cursor-not-allowed" id="email" type="text" readonly [value]="userData.email">
+            <input (change)="ChangeImg($event)" class="rounded-full w-1/4 read-only:bg-slate-300 cursor-not-allowed"
+                id="email" type="text" readonly [value]="userData.email">
         </div>
         <div class="flex items-center my-3 gap-x-3 text-3xl font-semibold">
             <h1>Gender:<span> {{userData.gender | uppercase }} </span> </h1>
@@ -24,54 +23,45 @@
             <h1>Date of Birth:<span> {{userData.dateOfBirth | date:'fullDate' }} </span> </h1>
         </div>
         <div class="flex items-center my-3 gap-x-3 text-3xl font-semibold">
-            <button routerLink="/change-password" class="font-semibold text-xl py-2 rounded-md text-blue-500">Change Password?</button>
+            <button routerLink="/change-password" class="font-semibold text-xl py-2 rounded-md text-blue-500">Change
+                Password?</button>
         </div>
     </div>
     }
-
-
-
-
     <div class="my-3">
         @for (post of postsData; track post._id) {
-            <article class="rounded-md p-3 flex flex-col gap-4 my-3 bg-white">
-                <div class="post-head my-3 flex justify-between items-center">
-                    <div class="flex gap-2 items-center">
-                        <img class="w-10 h-10 rounded-full" [src]="post.user.photo" alt="">
-        
-                        <div>
-                            <h1 class="text-2xl font-black"> {{post.user.name}} </h1>
-                            <span class="text-slate-300 font-semibold"> {{post.createdAt | date:'short' }} </span>
-                        </div>
-                    </div>
-        
+        <article class="rounded-md p-3 flex flex-col gap-4 my-3 bg-white">
+            <div class="post-head my-3 flex justify-between items-center">
+                <div class="flex gap-2 items-center">
+                    <img class="w-10 h-10 rounded-full" [src]="post.user.photo" alt="">
                     <div>
-                        <span>
-                            <i class="fa-solid fa-sliders"></i>
-                        </span>
+                        <h1 class="text-2xl font-black"> {{post.user.name}} </h1>
+                        <span class="text-slate-300 font-semibold"> {{post.createdAt | date:'short' }} </span>
                     </div>
-        
                 </div>
-                <div class="post-body">
-                    @if(post.body){
-                    <p class="font-semibold my-3 text-xl"> {{post.body}} </p>
-                    }
-        
-                    @if(post.image){
-                    <img class="rounded-md w-full" [src]="post.image" alt="">
-                    }
+                <div class="cursor-pointer">
+                    <span>
+                        <i class="fa-solid fa-sliders"></i>
+                    </span>
                 </div>
-                <button #showComment class="text-blue-500 self-start font-semibold text-2xl">Show Comment</button>
-                @defer (on interaction(showComment)) {
-                <app-comments [postId]="post._id"></app-comments>
+            </div>
+            <div class="post-body">
+                @if(post.body){
+                <p class="font-semibold my-3 text-xl"> {{post.body}} </p>
                 }
-            </article>
-        
-            }@empty {
-                <h1 class="text-center my-4 font-bold text-4xl dark:text-white">Loading.... <span class="text-blue-500 text-2xl font-semibold"><i class="fa-solid fa-truck-ramp-box fa-shake"></i></span></h1>
+                @if(post.image){
+                <img class="rounded-md w-full" [src]="post.image" alt="">
+                }
+            </div>
+            <button #showComment class="text-blue-500 self-start font-semibold text-2xl">Show Comment</button>
+            @defer (on interaction(showComment)) {
+            <app-comments [postId]="post._id"></app-comments>
             }
-        
-
+        </article>
+        }@empty {
+        <h1 class="text-center my-4 font-bold text-4xl dark:text-white">Loading.... <span
+                class="text-blue-500 text-2xl font-semibold"><i class="fa-solid fa-truck-ramp-box fa-shake"></i></span>
+        </h1>
+        }
     </div>
-
 </section>
