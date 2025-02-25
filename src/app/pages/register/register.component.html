@@ -1,0 +1,68 @@
+<section class="p-2">
+
+    <h1 class="font-semibold text-blue-500 text-center text-5xl my-5">Linked Posts <span class="text-blue-400 font-bold"><i class="fa-brands fa-staylinked"></i></span></h1>
+
+    <div class="rounded-md p-3 shadow-lg bg-white dark:shadow-slate-600">
+        @if(resMessage){<h1 class="w-3/4 p-3 mx-auto text-3xl text-slate-50 font-semibold text-center bg-sky-400 rounded-md"> {{resMessage}} </h1>}
+        <form [formGroup]="registerUser" (ngSubmit)="SubmitUser()">
+            <div class="my-4">
+                @let nameControl = this.registerUser.get('name');
+                <label class="ml-2 my-2 block" for="name">Name:</label>
+                <input [class]="{
+                    'input-valid' : nameControl?.errors && nameControl?.touched,
+                    'input-invalid' : !nameControl?.errors && nameControl?.touched,
+                }" formControlName="name" type="text" id="name" placeholder="ex:Example" class="w-full border-2 focus:border-slate-800 border-slate-500 placeholder:text-slate-700 rounded-full">
+            </div>
+            <div class="my-4">
+                @let emailControl = this.registerUser.get('email');
+                <label class="ml-2 my-2 block" for="email">Email:</label>
+                <input [class]="{
+                    'input-valid' : emailControl?.errors && emailControl?.touched,
+                    'input-invalid' : !emailControl?.errors && emailControl?.touched,
+                }" formControlName="email" type="email" id="email" placeholder="ex:Example@example.com" class="w-full border-2 focus:border-slate-800 border-slate-500 placeholder:text-slate-700 rounded-full">
+            </div>
+            <div class="my-4">
+                @let passwordControl = this.registerUser.get('password');
+                <label class="ml-2 my-2 block" for="password">Password:</label>
+                <input [class]="{
+                    'input-valid' : passwordControl?.errors && passwordControl?.touched,
+                    'input-invalid' : !passwordControl?.errors && passwordControl?.touched,
+                }" formControlName="password" type="password" id="password" placeholder="ex:Example@123" class="w-full border-2 focus:border-slate-800 border-slate-500 placeholder:text-slate-700 rounded-full">
+            </div>
+            <div class="my-4">
+                @let rePasswordControl = this.registerUser.get('rePassword');
+                <label class="ml-2 my-2 block" for="rePassword">Re-Password:</label>
+                <input [class]="{
+                    'input-valid' : registerUser?.errors && rePasswordControl?.touched,
+                    'input-invalid' : !registerUser?.errors && rePasswordControl?.touched,
+                }" formControlName="rePassword" type="password" id="rePassword" placeholder="ex:Example@123" class="w-full border-2 focus:border-slate-800 border-slate-500 placeholder:text-slate-700 rounded-full">
+            </div>
+            <div class="my-4">
+                @let dateOfBirthControl = this.registerUser.get('dateOfBirth');
+                <label class="ml-2 my-2 block" for="dateOfBirth">Date of birth:</label>
+                <input [class]="{
+                    'input-valid' : dateOfBirthControl?.errors && dateOfBirthControl?.touched,
+                    'input-invalid' : !dateOfBirthControl?.errors && dateOfBirthControl?.touched,
+                }" formControlName="dateOfBirth" type="date" id="dateOfBirth" class="w-full border-2 focus:border-slate-800 border-slate-500 placeholder:text-slate-700 rounded-full">
+            </div>
+            <div class="my-4 flex items-center gap-3">
+                @let genderControl = this.registerUser.get('gender');
+                <label class="ml-2 my-2 block" for="male">Male:</label>
+                <input [class]="{
+                    'input-valid' : genderControl?.errors && genderControl?.touched,
+                    'input-invalid' : !genderControl?.errors && genderControl?.touched,
+                }" formControlName="gender" type="radio" id="male" class="" name="gender" value="male">
+                <label class="ml-2 my-2 block" for="female">Female:</label>
+                <input [class]="{
+                    'input-valid' : genderControl?.errors && genderControl?.touched,
+                    'input-invalid' : !genderControl?.errors && genderControl?.touched,
+                }" formControlName="gender" type="radio" id="female" class="" name="gender" value="female">
+            </div>
+            <div class="my-4">
+                <button [disabled]="registerUser.invalid" class="main-btn disabled:bg-slate-300 disabled:cursor-no-drop">Submit</button>
+            </div>
+        </form>
+
+    </div>
+
+</section>
